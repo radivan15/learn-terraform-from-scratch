@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-southeast-1"
+  region = var.region
 
   # Tag ini otomatis ditempel ke semua resource yang mendukung tag
   default_tags {
@@ -22,7 +22,7 @@ provider "aws" {
 }
 
 resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block = var.vpc_cidr
 
   # Dua setting DNS ini dibutuhkan kalau nanti pakai VPC Endpoint
   enable_dns_support   = true

@@ -35,15 +35,16 @@ Documents a step-by-step path through Terraform on AWS — starting with a singl
 
 ## Folder Structure
 
-Current state (Stage 1 in progress) — the layout will change in Stage 2 (modules) and Stage 3 (`environments/`).
+Current state (Stage 1 done) — the layout will change in Stage 2 (modules) and Stage 3 (`environments/`).
 
 ```
 learn-terraform-from-scratch/
 ├── bootstrap/          # AWS Budgets alert — own state, not destroyed with the VPC
 │   └── main.tf
-├── vpc/                # first VPC — provider, aws_vpc, variables
+├── vpc/                # first VPC — provider, aws_vpc, variables, outputs
 │   ├── main.tf
-│   └── variables.tf
+│   ├── variables.tf
+│   └── outputs.tf
 ├── ROADMAP.md
 └── README.md
 ```

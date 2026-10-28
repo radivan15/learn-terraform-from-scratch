@@ -3,12 +3,12 @@
 ## Phase 1 — Foundations
 > Get a single VPC running, then turn it into something reusable
 
-- [ ] Stage 1 — AWS Budgets alert, then initial VPC setup
+- [x] Stage 1 — AWS Budgets alert, then initial VPC setup
   - [x] AWS Budgets alert in a separate `bootstrap/` folder with its own state (safety net first)
   - [x] VPC in `vpc/`: provider with `default_tags`, `aws_vpc`, DNS settings
   - [x] Input variables (`region`, `vpc_cidr`)
-  - [ ] Outputs
-  - [ ] First `apply` + `destroy` of the VPC
+  - [x] Outputs
+  - [x] First `apply` + `destroy` of the VPC
 - [ ] Stage 2 — Move VPC resource into a reusable module (`moved` block for zero-downtime state migration)
 - [ ] Stage 3 — Multi-environment folder structure (`environments/dev` + `environments/prod`, separate state per folder, committed `terraform.tfvars`)
 - [ ] Stage 4 — Remote state with S3 backend (native locking via `use_lockfile`, no DynamoDB table)
