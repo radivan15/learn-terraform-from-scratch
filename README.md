@@ -8,7 +8,7 @@ Hands-on Terraform learning journey — from a single VPC to a production-grade,
 
 ## What it does
 
-Documents a step-by-step path through Terraform on AWS — starting with a single VPC, then refactoring it into a reusable module with a multi-environment folder structure and remote state, adding real networking (data sources, public/private subnets, IGW, per-environment NAT Gateway, Flow Logs, VPC Endpoints), then production-grade practices (variable validation and deprecation, tagging strategy, lifecycle safeguards, cross-environment state references, `check` blocks, ephemeral resources and write-only arguments), advanced HCL (dynamic blocks, `depends_on`, `import`/`moved`/`removed` blocks, `terraform query`), and finally native testing (`terraform test`) plus a CI/CD pipeline via GitHub Actions with OIDC and `tflint`/`trivy`/`terraform-docs` tooling.
+Documents a step-by-step path through Terraform on AWS — starting with a single VPC, then refactoring it into a reusable module with a multi-environment folder structure and remote state, adding real networking, then production-grade practices.
 
 ---
 
@@ -23,7 +23,7 @@ Documents a step-by-step path through Terraform on AWS — starting with a singl
 | Layer | Tool |
 |---|---|
 | IaC | Terraform ~> 1.16 | 
-| Provider | hashicorp/aws ~> 6.0 |
+| Provider | hashicorp/aws ~> 6.0, hashicorp/random (Stage 16) |
 | Cloud provider | AWS (VPC, IAM, CloudWatch, S3, SSM Parameter Store) |
 | Remote state | S3 backend with native locking (`use_lockfile`) |
 | CI/CD | GitHub Actions (OIDC to AWS — no long-lived keys) |
@@ -35,13 +35,25 @@ Documents a step-by-step path through Terraform on AWS — starting with a singl
 
 ## Folder Structure
 
-not available yet.
+Current state (Stage 1 in progress) — the layout will change in Stage 2 (modules) and Stage 3 (`environments/`).
+
+```
+learn-terraform-from-scratch/
+├── bootstrap/          # AWS Budgets alert — own state, not destroyed with the VPC
+│   └── main.tf
+├── vpc/                # first VPC — provider, aws_vpc, variables
+│   ├── main.tf
+│   └── variables.tf
+├── ROADMAP.md
+└── README.md
+```
 
 ---
 
 ## Installation
 
 not available yet.
+
 ---
 
 ## Roadmap

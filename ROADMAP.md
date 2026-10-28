@@ -3,7 +3,12 @@
 ## Phase 1 — Foundations
 > Get a single VPC running, then turn it into something reusable
 
-- [ ] Stage 1 — Initial VPC setup (provider with `default_tags`, variables, outputs, DNS settings)
+- [ ] Stage 1 — AWS Budgets alert, then initial VPC setup
+  - [x] AWS Budgets alert in a separate `bootstrap/` folder with its own state (safety net first)
+  - [x] VPC in `vpc/`: provider with `default_tags`, `aws_vpc`, DNS settings
+  - [x] Input variables (`region`, `vpc_cidr`)
+  - [ ] Outputs
+  - [ ] First `apply` + `destroy` of the VPC
 - [ ] Stage 2 — Move VPC resource into a reusable module (`moved` block for zero-downtime state migration)
 - [ ] Stage 3 — Multi-environment folder structure (`environments/dev` + `environments/prod`, separate state per folder, committed `terraform.tfvars`)
 - [ ] Stage 4 — Remote state with S3 backend (native locking via `use_lockfile`, no DynamoDB table)
@@ -56,8 +61,9 @@
 
 ## Conventions
 
-- Never commit `.tfstate` or `*.tfvars` files — already covered by `.gitignore`
+- Never commit `.tfstate` files, or `*.tfvars` other than `terraform.tfvars` (non-secret values only) — already covered by `.gitignore`
+- Set `required_version = "~> 1.16"` in `terraform {}` — `deprecated` (1.15) and `terraform query` (1.14) fail on older versions
 - Always commit `.terraform.lock.hcl` — pins provider versions and checksums so local and CI stay identical
-- Set up an AWS Budgets alert before Stage 8 (NAT Gateway) — a forgotten `destroy` should trigger an email, not a surprise bill
+- AWS Budgets alert is set up in Stage 1 via `bootstrap/` (separate state from the VPC, so the daily `destroy` of the VPC doesn't remove it) — a forgotten `destroy` should trigger an email, not a surprise bill
 - Always run `terraform plan` before `apply` — never apply blind
 - **Always run `terraform destroy` when done for the day** — NAT Gateway and VPC Endpoints cost money even when idle
