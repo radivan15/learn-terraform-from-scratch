@@ -21,14 +21,14 @@ provider "aws" {
   }
 }
 
-resource "aws_vpc" "main" {
-  cidr_block = var.vpc_cidr
+module "vpc" {
+  source = "../modules/vpc" # path lokal, relatif terhadap folder vpc/
 
-  # Dua setting DNS ini dibutuhkan kalau nanti pakai VPC Endpoint
-  enable_dns_support   = true
-  enable_dns_hostnames = true
+  vpc_cidr = var.vpc_cidr # oper variabel root ke input module
+}
 
-  tags = {
-    Name = "learn-terraform-vpc"
-  }
+# Memberi tahu Terraform: resource ini cuma pindah alamat, bukan resource baru
+moved {
+  from = aws_vpc.main            # alamat lama di state
+  to   = module.vpc.aws_vpc.main # alamat baru
 }

@@ -25,7 +25,7 @@ variable "alert_email" {
 resource "aws_budgets_budget" "monthly" {
   name         = "monthly-cost"
   budget_type  = "COST"
-  limit_amount = "10"       # string, bukan angka — sesuai skema provider
+  limit_amount = "10" # string, bukan angka — sesuai skema provider
   limit_unit   = "USD"
   time_unit    = "MONTHLY"
 

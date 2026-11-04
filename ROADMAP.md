@@ -9,7 +9,12 @@
   - [x] Input variables (`region`, `vpc_cidr`)
   - [x] Outputs
   - [x] First `apply` + `destroy` of the VPC
-- [ ] Stage 2 — Move VPC resource into a reusable module (`moved` block for zero-downtime state migration)
+- [x] Stage 2 — Move VPC resource into a reusable module (`moved` block for zero-downtime state migration)
+  - [x] Re-apply the VPC so the state has something to migrate
+  - [x] Reusable module in `modules/vpc/` (`required_providers` only, no `provider` block)
+  - [x] Root `vpc/` calls the module; outputs read from `module.vpc.*`
+  - [x] Plan without `moved` → 1 to add, 1 to destroy (the problem)
+  - [x] `moved` block → 0 to add, 0 to change, 0 to destroy (same VPC ID, state address updated)
 - [ ] Stage 3 — Multi-environment folder structure (`environments/dev` + `environments/prod`, separate state per folder, committed `terraform.tfvars`)
 - [ ] Stage 4 — Remote state with S3 backend (native locking via `use_lockfile`, no DynamoDB table)
 
