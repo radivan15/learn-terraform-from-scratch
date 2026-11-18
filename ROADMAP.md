@@ -15,13 +15,13 @@
   - [x] Root `vpc/` calls the module; outputs read from `module.vpc.*`
   - [x] Plan without `moved` → 1 to add, 1 to destroy (the problem)
   - [x] `moved` block → 0 to add, 0 to change, 0 to destroy (same VPC ID, state address updated)
-- [ ] Stage 3 — Multi-environment folder structure (`environments/dev` + `environments/prod`, separate state per folder, committed `terraform.tfvars`)
+- [x] Stage 3 — Multi-environment folder structure (`environments/dev` + `environments/prod`, separate state per folder, committed `terraform.tfvars`)
   - [x] Module input `name` replaces the hardcoded `Name` tag (no default — fail fast if a caller forgets it)
   - [x] `environments/dev` calls the module; values live in `terraform.tfvars`, declarations in `variables.tf`
   - [x] Plan in dev → 1 to add, `Name = "learn-terraform-dev"`
-  - [ ] `environments/prod` with a non-overlapping CIDR (`10.1.0.0/16`)
-  - [ ] Remove the old `vpc/` folder
-  - [ ] Apply + destroy dev, confirm prod's state is untouched
+  - [x] `environments/prod` with a non-overlapping CIDR (`10.1.0.0/16`) — ready for future peering/Transit Gateway
+  - [x] Remove the old `vpc/` folder (after `terraform state list` was empty — no orphaned VPC)
+  - [x] Apply + destroy dev; prod had no state file and still planned 1 to add (isolation proven)
 - [ ] Stage 4 — Remote state with S3 backend (native locking via `use_lockfile`, no DynamoDB table)
 
 ## Phase 2 — Networking

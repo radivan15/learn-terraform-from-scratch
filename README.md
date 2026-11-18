@@ -35,14 +35,19 @@ Documents a step-by-step path through Terraform on AWS — starting with a singl
 
 ## Folder Structure
 
-Current state (Stage 3 in progress) — `environments/prod` comes next, then the old `vpc/` folder is removed.
+Current state (Stage 3 done) — each environment is its own root config with its own state; only `terraform.tfvars` differs.
 
 ```
 learn-terraform-from-scratch/
 ├── bootstrap/          # AWS Budgets alert — own state, not destroyed with the VPC
 │   └── main.tf
 ├── environments/
-│   └── dev/            # dev root config — own state, values in terraform.tfvars
+│   ├── dev/            # 10.0.0.0/16 — own state, values in terraform.tfvars
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   └── terraform.tfvars
+│   └── prod/           # 10.1.0.0/16 — same files, different terraform.tfvars
 │       ├── main.tf
 │       ├── variables.tf
 │       ├── outputs.tf
@@ -52,10 +57,6 @@ learn-terraform-from-scratch/
 │       ├── main.tf
 │       ├── variables.tf
 │       └── outputs.tf
-├── vpc/                # old root config (Stage 1–2) — to be removed in Stage 3
-│   ├── main.tf
-│   ├── variables.tf
-│   └── outputs.tf
 ├── ROADMAP.md
 └── README.md
 ```

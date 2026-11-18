@@ -7,5 +7,9 @@ variable "region" {
 variable "vpc_cidr" {
   type        = string
   description = "CIDR block untuk VPC"
-  default     = "10.0.0.0/16"
+}
+
+variable "name" {
+  type        = string
+  description = "Nama VPC, dipakai di tag Name (contoh: learn-terraform-dev)"
 }

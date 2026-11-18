@@ -22,13 +22,9 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "../modules/vpc" # path lokal, relatif terhadap folder vpc/
+  source = "../../modules/vpc"
 
-  vpc_cidr = var.vpc_cidr # oper variabel root ke input module
+  vpc_cidr = var.vpc_cidr
+  name     = var.name
 }
 
-# Memberi tahu Terraform: resource ini cuma pindah alamat, bukan resource baru
-moved {
-  from = aws_vpc.main            # alamat lama di state
-  to   = module.vpc.aws_vpc.main # alamat baru
-}
