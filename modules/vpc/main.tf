@@ -15,6 +15,7 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "learn-terraform-vpc"
+    Name = var.name # nama datang dari pemanggil (environment), bukan hardcode
   }
+
 }
